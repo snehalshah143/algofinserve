@@ -37,6 +37,8 @@ private static Connection  connection;
 
    }
 
+
+
    private static Set<ChartInkScanRecord> convertJSONArrayToChartInkScanRecord(JSONArray list) throws JsonProcessingException {
       ObjectMapper mapper=new ObjectMapper();
       Set<ChartInkScanRecord> scanStocksRecords=new HashSet<>();
@@ -64,14 +66,16 @@ private static Connection  connection;
       return chartinkResponseJsonObject;
    }
 
-   private static String getxCsrfToken() throws IOException {
+   public static String getxCsrfToken() throws IOException {
       Document doc =connection.get();
       Document documentJsoup= Jsoup.parse(doc.html());
-      Elements elements= documentJsoup.getElementsByTag("meta");
+     // Elements elements= documentJsoup.getElementsByTag("meta");
       String xCsrfToken=documentJsoup.getElementsByTag("meta").stream()
               .filter(e->e.attr("name").equals("csrf-token")).map(p->p.attr("content"))
               .findFirst().get();
       System.out.println("Final===xcrfToken=value=: " +xCsrfToken);
       return xCsrfToken;
    }
+
+
 }

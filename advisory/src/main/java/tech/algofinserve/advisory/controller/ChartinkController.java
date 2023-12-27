@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChartinkController {
 
     @PostMapping(path = "/triggerAlertAQCXZ", consumes = "application/json")
-    public void alertsRecived(@RequestBody Alert alert) {
+    public void alertsReceived(@RequestBody Alert alert) {
         System.out.println(alert.toString());
         /*
          * ObjectMapper mapper=new ObjectMapper(); try { Alert a=mapper.readValue(alert,
