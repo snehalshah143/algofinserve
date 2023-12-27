@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import tech.algofinserve.advisory.model.Recommendation;
-import tech.algofinserve.advisory.model.RecommendationUpdate;
 
 @RestController
 public class RecommendationController {
@@ -21,7 +20,7 @@ public class RecommendationController {
     }
 
     @PostMapping(path = "/recommend/update", consumes = "application/json")
-    public void recommendUpdate(@RequestBody RecommendationUpdate recommendationUpdate) {
+    public void recommendUpdate(@RequestBody Recommendation recommendationUpdate) {
         System.out.println(recommendationUpdate.toString());
         /*
          * ObjectMapper mapper=new ObjectMapper(); try { Alert a=mapper.readValue(alert,

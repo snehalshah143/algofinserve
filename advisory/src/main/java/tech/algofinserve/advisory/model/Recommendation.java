@@ -11,20 +11,18 @@ import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+
 public class Recommendation {
 
     public Recommendation() {}
-    private @Id
-    //   @GeneratedValue(strategy = GenerationType.TABLE)
-    Long recommendationId;
+    private  Long recommendationId;
     @JsonProperty("recommendedDate")
     Date recommendedDate;
 
     @JsonProperty("buySell")
     BuySell buySell;
     @JsonProperty("stock")
-    Ticker stock;
+    String stock;
     @JsonProperty("stockSegment")
     StockSegment stockSegment;
     @JsonProperty("entryPrice")
@@ -92,11 +90,11 @@ public class Recommendation {
         this.buySell = buySell;
     }
 
-    public Ticker getStock() {
+    public String getStock() {
         return stock;
     }
 
-    public void setStock(Ticker stock) {
+    public void setStock(String stock) {
         this.stock = stock;
     }
 

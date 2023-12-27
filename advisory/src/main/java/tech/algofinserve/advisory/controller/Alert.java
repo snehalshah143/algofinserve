@@ -7,10 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+
 public class Alert implements Serializable {
 
-    private @Id @GeneratedValue(strategy = GenerationType.TABLE) Long alertId;
+//    private @Id @GeneratedValue(strategy = GenerationType.TABLE) Long alertId;
+    private Long alertId;
 
     @JsonProperty("stocks")
     private String stocks;
