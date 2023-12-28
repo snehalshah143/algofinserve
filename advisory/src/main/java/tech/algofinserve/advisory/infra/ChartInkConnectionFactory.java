@@ -1,7 +1,9 @@
-package tech.algofinserve.advisory.chartink;
+package tech.algofinserve.advisory.infra;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+
+import javax.annotation.PostConstruct;
 
 public class ChartInkConnectionFactory {
 
@@ -11,8 +13,7 @@ public class ChartInkConnectionFactory {
     {
 
     }
-
-
+    @PostConstruct
     public static synchronized Connection getChartInkConnection()
     {
         if (connection == null) {

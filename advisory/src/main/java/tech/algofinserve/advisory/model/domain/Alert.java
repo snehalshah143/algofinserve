@@ -1,11 +1,8 @@
-package tech.algofinserve.advisory.controller;
+package tech.algofinserve.advisory.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 
 public class Alert implements Serializable {

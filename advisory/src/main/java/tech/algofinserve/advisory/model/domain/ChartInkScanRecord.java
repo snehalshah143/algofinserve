@@ -1,16 +1,15 @@
-package tech.algofinserve.advisory.model;
+package tech.algofinserve.advisory.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+
 public class ChartInkScanRecord {
 
     public ChartInkScanRecord() {}
-    private @Id
- //   @GeneratedValue(strategy = GenerationType.TABLE)
+
     Long sr;
     @JsonProperty("name")
     private String stockName;

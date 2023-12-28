@@ -1,8 +1,9 @@
 package tech.algofinserve.advisory.util;
 
-import tech.algofinserve.advisory.model.ChartInkScanRecord;
-import tech.algofinserve.advisory.model.Ticker;
-
+import org.springframework.stereotype.Component;
+import tech.algofinserve.advisory.model.domain.ChartInkScanRecord;
+import tech.algofinserve.advisory.model.domain.Ticker;
+@Component
 public class ConversionUtil {
 
     public Ticker convertChartInkRecordToTicker(ChartInkScanRecord chartInkScanRecord){

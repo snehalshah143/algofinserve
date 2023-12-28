@@ -1,4 +1,4 @@
-package tech.algofinserve.advisory.model;
+package tech.algofinserve.advisory.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import tech.algofinserve.advisory.constants.BuySell;
@@ -6,8 +6,6 @@ import tech.algofinserve.advisory.constants.RecommendationStatus;
 import tech.algofinserve.advisory.constants.RecommendationType;
 import tech.algofinserve.advisory.constants.StockSegment;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 
@@ -57,6 +55,8 @@ public class Recommendation {
     String actualGain;
     @JsonProperty("actualGainInPercent")
     String actualGainInPercent;
+    @JsonProperty("timeframe")
+    String timeframe;
 
     public Date getUpdatedDate() {
         return updatedDate;
@@ -193,5 +193,37 @@ public class Recommendation {
 
     public void setRecommendedDate(Date recommendedDate) {
         this.recommendedDate = recommendedDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getActualGain() {
+        return actualGain;
+    }
+
+    public void setActualGain(String actualGain) {
+        this.actualGain = actualGain;
+    }
+
+    public String getActualGainInPercent() {
+        return actualGainInPercent;
+    }
+
+    public void setActualGainInPercent(String actualGainInPercent) {
+        this.actualGainInPercent = actualGainInPercent;
+    }
+
+    public String getTimeframe() {
+        return timeframe;
+    }
+
+    public void setTimeframe(String timeframe) {
+        this.timeframe = timeframe;
     }
 }

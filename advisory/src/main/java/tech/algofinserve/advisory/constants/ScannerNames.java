@@ -1,4 +1,4 @@
-package tech.algofinserve.advisory.chartink;
+package tech.algofinserve.advisory.constants;
 
 public interface ScannerNames {
 

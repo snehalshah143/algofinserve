@@ -1,33 +1,19 @@
 package tech.algofinserve.advisory.chartink;
 
-import tech.algofinserve.advisory.model.Recommendation;
-import tech.algofinserve.advisory.model.Ticker;
+import org.springframework.stereotype.Component;
+import tech.algofinserve.advisory.model.domain.Ticker;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@Component
 public class TotalStocksRepository {
 
-  public static TotalStocksRepository totalStocksRepository=new TotalStocksRepository();
-    private TotalStocksRepository(){
+    public static List<Ticker> allStockInformationList=new ArrayList<>();
+    public static List<String> monthlyBaseStockList=new ArrayList<>();
+    public static List<String> avoidStockListForIntraday=new ArrayList<>();
+    public static List<String> avoidStockListForPositionalLongTerm=new ArrayList<>();
 
-    }
 
-    public static  TotalStocksRepository getTotalStocksRepositoryInstance() {
-        return totalStocksRepository;
-    }
 
-    public static List<Ticker> monthlyBaseStockList=new ArrayList<>();
-    public static Map<Ticker,List<Recommendation>> stockWiseRecommendationsList=new HashMap<>();
-    public static Map<Ticker,List<Recommendation>> stockWiseInActiveRecommendationsList=new HashMap<>();
-    public static List<Ticker> avoidStockList=new ArrayList<>();
-    public static List<Ticker> getMonthlyBaseStockList() {
-        return monthlyBaseStockList;
-    }
-
-    public static List<Ticker> getAvoidStockList() {
-        return avoidStockList;
-    }
 }

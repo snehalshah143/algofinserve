@@ -3,7 +3,7 @@ package tech.algofinserve.advisory.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import tech.algofinserve.advisory.model.Recommendation;
+import tech.algofinserve.advisory.model.domain.Recommendation;
 
 @RestController
 public class RecommendationController {

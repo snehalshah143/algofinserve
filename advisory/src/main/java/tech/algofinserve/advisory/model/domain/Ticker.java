@@ -1,12 +1,10 @@
-package tech.algofinserve.advisory.model;
+package tech.algofinserve.advisory.model.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+
 public class Ticker {
-    private @Id
-    //   @GeneratedValue(strategy = GenerationType.TABLE)
     Long tickerId;
     String stockName;
     String bseCode;

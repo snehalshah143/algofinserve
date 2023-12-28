@@ -1,9 +1,12 @@
 package tech.algofinserve.advisory.chartink;
 
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-
+@Component
 public class ScannerListFactory {
 
 
@@ -14,16 +17,10 @@ public class ScannerListFactory {
 
     private static Map<String,String> allScanClauseMap=new HashMap<>();
 
-    private static ScannerListFactory scannerList;
-  private ScannerListFactory(){
-      loadScannerListPropertiesFile();
-  }
-
-  public static ScannerListFactory getScannerListInstance(){
-
-      scannerList= new ScannerListFactory();
-      return scannerList;
-  }
+    @PostConstruct
+public void init(){
+        loadScannerListPropertiesFile();
+    }
 
 
 
@@ -51,8 +48,6 @@ public class ScannerListFactory {
         String[] arr= line.split(":");
             allScanClauseMap.put(arr[0],arr[1]);
     }
-        System.out.println(allScanClauseMap);
-        System.out.println(allScanClauseMap.size());
     }
 
     public static Map<String, String> getLiveWeeklyscanClauseMap() {

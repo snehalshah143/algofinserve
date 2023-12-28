@@ -1,4 +1,4 @@
-package tech.algofinserve.advisory.chartink;
+package tech.algofinserve.advisory.infra;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,27 +9,25 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
-import org.jsoup.select.Elements;
-import tech.algofinserve.advisory.model.ChartInkScanRecord;
+import org.springframework.stereotype.Component;
+import tech.algofinserve.advisory.model.domain.ChartInkScanRecord;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
+@Component
 public class ChartInkInfra {
 
 private static Connection  connection;
    public ChartInkInfra(){
-      connection=ChartInkConnectionFactory.getChartInkConnection();
+      connection= ChartInkConnectionFactory.getChartInkConnection();
    }
-   public static Set<ChartInkScanRecord> getStocksListForScannerCondition(String condition) throws IOException {
+   public Set<ChartInkScanRecord> getStocksListForScannerCondition(String condition) throws IOException {
 
       JSONObject chartinkScanResponseJsonObject = getStockListForScannerCondition( condition);
-      System.out.println(chartinkScanResponseJsonObject);
       JSONArray list= (JSONArray) chartinkScanResponseJsonObject.get("data");
-
       Set<ChartInkScanRecord> scanStocksRecords = convertJSONArrayToChartInkScanRecord(list);
 
       return scanStocksRecords;
@@ -45,13 +43,12 @@ private static Connection  connection;
       for(int i = 0; i< list.length(); i++){
          JSONObject jsonObject1= (JSONObject) list.get(i);
          ChartInkScanRecord a = mapper.readValue(jsonObject1.toString(),ChartInkScanRecord.class);
-         System.out.println(a.toString());
          scanStocksRecords.add(a);
       }
       return scanStocksRecords;
    }
 
-   private static JSONObject getStockListForScannerCondition(String condition) throws IOException {
+   private JSONObject getStockListForScannerCondition(String condition) throws IOException {
       Map<String,String> headerMap=new HashMap<>();
       headerMap.put("x-csrf-token", getxCsrfToken());
       Map<String,String> dataMap=new HashMap<>();
@@ -66,7 +63,7 @@ private static Connection  connection;
       return chartinkResponseJsonObject;
    }
 
-   public static String getxCsrfToken() throws IOException {
+   public String getxCsrfToken() throws IOException {
       Document doc =connection.get();
       Document documentJsoup= Jsoup.parse(doc.html());
      // Elements elements= documentJsoup.getElementsByTag("meta");

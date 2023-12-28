@@ -1,9 +1,9 @@
 package tech.algofinserve.advisory.chartink;
 
 
-import java.io.IOException;
+import tech.algofinserve.advisory.infra.ChartInkInfra;
 
-import static tech.algofinserve.advisory.chartink.ScannerNames.Snehal_Monthly_BUY_Base_Stock_List;
+import java.io.IOException;
 
 public class ChartInkScrapper {
 
@@ -21,10 +21,9 @@ public class ChartInkScrapper {
 
        // stocksForScannerMap.put(chartInkScannerName,infra.getStocksListForScannerCondition(conditionScannerName));
 
-        ScannerListFactory scannerList= ScannerListFactory.getScannerListInstance();
-        scannerList.loadScannerListPropertiesFile();
+//        ScannerListFactory scannerList= ScannerListFactory.getScannerListInstance();
+//        scannerList.loadScannerListPropertiesFile();
 //System.out.println(infra.getStocksListForScannerCondition(ScannerListFactory.getAllScanClauseMap().get(Snehal_Monthly_BUY_Base_Stock_List)));
-
 
 
    }

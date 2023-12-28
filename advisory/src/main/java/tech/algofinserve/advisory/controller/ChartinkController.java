@@ -1,20 +1,25 @@
 package tech.algofinserve.advisory.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import tech.algofinserve.advisory.model.domain.Alert;
+import tech.algofinserve.advisory.processing.AlertProcessing;
 
 @RestController
 public class ChartinkController {
 
-    @PostMapping(path = "/triggerAlertAQCXZ", consumes = "application/json")
+    @Autowired
+    private AlertProcessing alertProcessing;
+
+    @PostMapping(path = "/BuyAlertHourly", consumes = "application/json")
     public void alertsReceived(@RequestBody Alert alert) {
         System.out.println(alert.toString());
-        /*
-         * ObjectMapper mapper=new ObjectMapper(); try { Alert a=mapper.readValue(alert,
-         * Alert.class); System.out.println(a); } catch (JsonProcessingException e) { //
-         * TODO Auto-generated catch block e.printStackTrace(); }
-         */
+
+        alertProcessing.processBuyAlert(alert);
 
     }
+
+
 }
