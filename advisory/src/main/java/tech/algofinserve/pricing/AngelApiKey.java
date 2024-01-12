@@ -8,4 +8,6 @@ public interface AngelApiKey {
     public final static String historicalApiKey="gX3qXZXn";
     public final static String historicalSecretKey="44064590-d952-44b4-b64b-175fcd1095cb";
 
+    public final static String oneTimetotpKey="RUVZEH5OVV6MDYEWWAQ3EUSGCM";
+
 }

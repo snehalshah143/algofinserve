@@ -159,7 +159,9 @@
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.16.1</version>
 		</dependency>
-<!--
+
+		<!-- Mongo DB-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -171,21 +173,27 @@
 		</dependency>
 
 
-		<dependency>
+	<!--	<dependency>
 			<groupId>de.flapdoodle.embed</groupId>
 			<artifactId>de.flapdoodle.embed.mongo</artifactId>
 			<version>1.46.0</version>
-		</dependency>
--->
+		</dependency>-->
+
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5.14</version>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>com.squareup.okhttp</groupId>
 			<artifactId>okhttp</artifactId>
 			<version>2.7.5</version>
+		</dependency>-->
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.6.0.Beta1</version>
 		</dependency>
 
 		<dependency>
@@ -199,11 +207,11 @@
 			<version>3.2.6</version>
 		</dependency>
 		<!-- Angel  Related -->
-		<dependency>
+<!--		<dependency>
 			<groupId>com.squareup.okhttp</groupId>
 			<artifactId>okhttp</artifactId>
 			<version>2.7.5</version>
-		</dependency>
+		</dependency>-->
 
 <!--		///Technical analysis-->
 		<dependency>
@@ -215,8 +223,49 @@
 		<dependency>
 			<groupId>com.angelbroking.smartapi</groupId>
 			<artifactId>smartapi-java</artifactId>
-			<version>2.2.0</version>
+			<version>2.3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.squareup.okio</groupId>
+			<artifactId>okio</artifactId>
+<!--			<version>2.8.0</version>-->
+			<version>3.6.0</version>
+		</dependency>
+
+		<!-- Only FOr Smart API 2.2.3-->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.warrenstrange</groupId>
+			<artifactId>googleauth</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+<!--		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock</artifactId>
+			<version>3.0.1</version>
+		</dependency>-->
+
+		<dependency>
+			<groupId>org.wiremock</groupId>
+			<artifactId>wiremock</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>logging-interceptor</artifactId>
+			<version>4.11.0</version>
+		</dependency>
+		<!-- Only FOr Smart API 2.2.3-->
+
 
 	</dependencies>
 
@@ -227,12 +276,12 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<plugin>
+<!--			<plugin>
 				<groupId>com.cosium.code</groupId>
 				<artifactId>git-code-format-maven-plugin</artifactId>
 				<version>3.3</version>
 				<executions>
-					<!-- On commit, format the modified java files -->
+					&lt;!&ndash; On commit, format the modified java files &ndash;&gt;
 					<execution>
 						<id>install-formatter-hook</id>
 						<goals>
@@ -240,6 +289,21 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>-->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.6.0.Beta1</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,58 +1,64 @@
-package tech.algofinserve.advisory.model.domain;
+package tech.algofinserve.advisory.model.persistable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.Document;
 import tech.algofinserve.advisory.constants.BuySell;
 import tech.algofinserve.advisory.constants.RecommendationStatus;
 import tech.algofinserve.advisory.constants.StockSegment;
+import tech.algofinserve.advisory.model.domain.RecommendationTimeFrame;
+import tech.algofinserve.advisory.model.domain.RecommendedBy;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+@Document(collection = "recommendation")
+public class RecommendationPersistable implements Serializable {
 
-public class Recommendation {
-
-    public Recommendation() {}
+    public RecommendationPersistable() {}
     private  Long recommendationId;
-    @JsonProperty("recommendedDate")
+
     Date recommendedDate;
 
-    @JsonProperty("buySell")
+
     BuySell buySell;
-    @JsonProperty("symbol")
+
     String symbol;
-    @JsonProperty("stockSegment")
+
     StockSegment stockSegment;
-    @JsonProperty("entryPrice")
+
     String entryPrice;
-    @JsonProperty("targets")
+
     List<String> targets;
-    @JsonProperty("stoploss1")
+
 
     String stoploss1;
-    @JsonProperty("stoploss2")
+
     String stoploss2;
-    @JsonProperty("hardStoploss")
+
     String hardStoploss;
-    @JsonProperty("expectedGain")
+
     String expectedGain;
-    @JsonProperty("expectedGainInPercent")
+
     String expectedGainInPercent;
-    @JsonProperty("recommendedBy")
+
+    RecommendationTimeFrame recommendationTimeFrame;
+
     RecommendedBy recommendedBy;
-    @JsonProperty("recommendationBasedOnScanner")
+
     String recommendationBasedOnScanner;
-    @JsonProperty("updatedDate")
+
     Date updatedDate;
-    @JsonProperty("updatedStatus")
+
     RecommendationStatus updatedStatus;
-    @JsonProperty("active")
+
     Boolean active;
 
-    @JsonProperty("actualGain")
+
     String actualGain;
-    @JsonProperty("actualGainInPercent")
+
     String actualGainInPercent;
-    @JsonProperty("recommendationTimeframe")
+
     RecommendationTimeFrame recommendationTimeframe;
 
     public Date getUpdatedDate() {
@@ -87,6 +93,7 @@ public class Recommendation {
         this.buySell = buySell;
     }
 
+
     public StockSegment getStockSegment() {
         return stockSegment;
     }
@@ -108,7 +115,7 @@ public class Recommendation {
     }
 
     public void setTargets(List<String> targets) {
-        this.targets=targets;
+        this.targets = targets;
     }
 
     public String getStoploss1() {
@@ -144,7 +151,13 @@ public class Recommendation {
         this.symbol = symbol;
     }
 
+    public RecommendationTimeFrame getRecommendationTimeFrame() {
+        return recommendationTimeFrame;
+    }
 
+    public void setRecommendationTimeFrame(RecommendationTimeFrame recommendationTimeFrame) {
+        this.recommendationTimeFrame = recommendationTimeFrame;
+    }
 
     public Boolean getActive() {
         return active;
