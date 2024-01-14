@@ -12,11 +12,11 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.dao.InstrumentTickerAngelRepository;
 import tech.algofinserve.advisory.mapper.InstrumentTickerAngelMapper;
 import tech.algofinserve.advisory.model.domain.InstrumentTickerAngel;
 import tech.algofinserve.advisory.model.persistable.InstrumentTickerAngelPersistable;
-import tech.algofinserve.advisory.model.persistable.RecommendationPersistable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,9 +26,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -47,22 +45,16 @@ private final String ANGEL_ALL_INSTRUMENT_FILE_CSV="src/main/resources/all_instr
     @Autowired
     InstrumentTickerAngelMapper instrumentTickerMapper;
 
-   private List<InstrumentTickerAngel> instrumentTickerAngelList =new ArrayList<>();
-   //NSE Code to Instrument Map
-   private Map<String,InstrumentTickerAngel> instrumentTickerAngelMap=new ConcurrentHashMap<>();
- //  @PostConstruct
+   private Map<ExchangeSegment,Map<String,InstrumentTickerAngel>> instrumentTickerForExchangeMap=new ConcurrentHashMap<>();
+
     public void loadInstrumentsTickerFromAPI() {
         deleteAllInstrumentTicker();
-        URLConnection request = null;
-        InputStreamReader inputStreamReader;
-        try {
-            request = new URL(ANGEL_ALL_INSTRUMENT_LIST_API).openConnection();
-            request.connect();
-            inputStreamReader = new InputStreamReader((InputStream) request.getContent());
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        InputStreamReader inputStreamReader;
+
+         //   inputStreamReader= readInstrumentTickerFileFromAngelServer();
+
+            inputStreamReader=new InputStreamReader(getClass().getResourceAsStream("/OpenAPIScripMaster.json"));
 
         // map to GSON objects
         JsonElement root = new JsonParser().parse(inputStreamReader);
@@ -71,16 +63,58 @@ private final String ANGEL_ALL_INSTRUMENT_FILE_CSV="src/main/resources/all_instr
 
         items.forEach(item -> {
             try {
-                InstrumentTickerAngel instrument = objectMapper.readValue(item.toString(), InstrumentTickerAngel.class);
-                instrumentTickerAngelList.add(instrument);
-                instrumentTickerAngelMap.put(instrument.getName(), instrument);
+
+
+                InstrumentTickerAngel   instrument = objectMapper.readValue(item.toString(), InstrumentTickerAngel.class);
+
+                ExchangeSegment instrumentExchangeSegment = null;
+                try {
+                    instrumentExchangeSegment = ExchangeSegment.valueOf(instrument.getExchSeg());
+                    populateInstrumentTickerForExchangeMap(instrument, instrumentExchangeSegment);
+
+                }catch( IllegalArgumentException e){
+                    
+// Do Nothing Ignored
+                }
+
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
 
-        saveInstrumentTickerList(instrumentTickerAngelList);
+        Arrays.stream(ExchangeSegment.values()).forEach(p->{
+            List<InstrumentTickerAngel> instrumentList=new ArrayList<>();
+            instrumentList.addAll(instrumentTickerForExchangeMap.get(p).values());
+            saveInstrumentTickerList(instrumentList);
+        });
+
+
 //writeDataToFile(ANGEL_ALL_INSTRUMENT_FILE_CSV,InstrumentTickerAngel.class, instrumentTickerAngelList);
+    }
+
+    private void populateInstrumentTickerForExchangeMap(InstrumentTickerAngel instrument, ExchangeSegment instrumentExchangeSegment) {
+        if(instrumentTickerForExchangeMap.containsKey(instrumentExchangeSegment)){
+       instrumentTickerForExchangeMap.get(instrumentExchangeSegment).put(instrument.getName(), instrument);
+    }else{
+       Map<String,InstrumentTickerAngel> instrumentTickerMap=new HashMap<>();
+       instrumentTickerMap.put(instrument.getName(), instrument);
+       instrumentTickerForExchangeMap.put(instrumentExchangeSegment,instrumentTickerMap);
+   }
+    }
+
+    private InputStreamReader readInstrumentTickerFileFromAngelServer()  {
+        InputStreamReader inputStreamReader;
+        URLConnection request = null;
+
+        try {
+            request = new URL(ANGEL_ALL_INSTRUMENT_LIST_API).openConnection();
+            request.connect();
+            inputStreamReader = new InputStreamReader((InputStream) request.getContent());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return inputStreamReader;
     }
 
     public void saveInstrumentTickerList(List<InstrumentTickerAngel> instrumentTickerAngelList){
@@ -92,29 +126,30 @@ private final String ANGEL_ALL_INSTRUMENT_FILE_CSV="src/main/resources/all_instr
     public void deleteAllInstrumentTicker(){
 
         instrumentTickerRepository.deleteAll();
-        instrumentTickerAngelList.clear();
-        instrumentTickerAngelMap.clear();
+        instrumentTickerForExchangeMap.clear();
     }
 
-    public List<InstrumentTickerAngel> getAllInstrumentTickerList(){
-        if(instrumentTickerAngelList.isEmpty()){
-            instrumentTickerAngelList
-                    .addAll(instrumentTickerRepository.findAll().stream()
-                    .map(p->instrumentTickerMapper.mapPersistableToDomain(p)).collect(Collectors.toList()));
+    public Map<String,InstrumentTickerAngel> getInstrumentTickerMapForExchangeSegment(ExchangeSegment exchangeSegment){
+        if(!instrumentTickerForExchangeMap.containsKey(exchangeSegment)){
+            Map<String,InstrumentTickerAngel> instrumentTickerMap=new ConcurrentHashMap<>();
 
+         List<InstrumentTickerAngelPersistable> instrumentTickerAngelList=instrumentTickerRepository.findInstrumentTickerByExchangeSegment(exchangeSegment.value());
+
+            instrumentTickerAngelList.stream().
+                    forEach(p->{
+                        instrumentTickerMap.put(p.getName(),instrumentTickerMapper.mapPersistableToDomain(p));
+                    });
+
+
+            instrumentTickerForExchangeMap.put(exchangeSegment,instrumentTickerMap);
         }
-        return instrumentTickerAngelList;
+        return instrumentTickerForExchangeMap.get(exchangeSegment);
     }
 
-    public InstrumentTickerAngel getInstrumentTickerForName(String tickerName){
-        if(instrumentTickerAngelMap.isEmpty()){
-            instrumentTickerAngelList
-                    .addAll(instrumentTickerRepository.findAll().stream()
-                            .map(p->instrumentTickerMapper.mapPersistableToDomain(p)).collect(Collectors.toList()));
-            instrumentTickerAngelList.stream()
-                    .forEach(p->instrumentTickerAngelMap.put(p.getName(), p));
-        }
-        return instrumentTickerAngelMap.get(tickerName);
+
+    public InstrumentTickerAngel getInstrumentTickerForStockName(String tickerName,ExchangeSegment exchangeSegment){
+
+        return getInstrumentTickerMapForExchangeSegment(exchangeSegment).get(tickerName);
     }
 
    public void writeDataToFile(String fileLocation,Class typeOfObject,List dataList) {

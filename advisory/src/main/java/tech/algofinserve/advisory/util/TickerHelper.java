@@ -1,15 +1,24 @@
 package tech.algofinserve.advisory.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import tech.algofinserve.advisory.model.domain.InstrumentTickerAngel;
 import tech.algofinserve.advisory.model.domain.Recommendation;
 import tech.algofinserve.advisory.model.domain.Ticker;
+import tech.algofinserve.advisory.service.MetaDataService;
 
 @Component
 public class TickerHelper {
 
-    public Ticker constructTicker(Recommendation recommendation){
+    @Autowired
+    MetaDataService metaDataService;
+    public Ticker constructTickerFromRecommendation(Recommendation recommendation){
         Ticker ticker=new Ticker();
-
+        ticker.setStockCode(recommendation.getStockCode());
+        ticker.setExchangeSegment(recommendation.getExchangeSegment());
+        ticker.setInstrumentType(recommendation.getInstrumentType());
+        InstrumentTickerAngel instrumentTickerAngel= metaDataService.getInstrumentTickerForStockName(recommendation.getStockCode(),recommendation.getExchangeSegment());
+        ticker.setToken(instrumentTickerAngel.getToken());
         return ticker;
     }
 }

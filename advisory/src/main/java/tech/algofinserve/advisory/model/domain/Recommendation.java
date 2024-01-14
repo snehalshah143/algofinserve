@@ -1,10 +1,7 @@
 package tech.algofinserve.advisory.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import tech.algofinserve.advisory.constants.BuySell;
-import tech.algofinserve.advisory.constants.ExchangeSegment;
-import tech.algofinserve.advisory.constants.RecommendationStatus;
-import tech.algofinserve.advisory.constants.ScannerName;
+import tech.algofinserve.advisory.constants.*;
 
 
 import java.util.Date;
@@ -18,10 +15,14 @@ public class Recommendation {
     @JsonProperty("recommendedDate")
     Date recommendedDate;
 
+    @JsonProperty("instrumentType")
+    InstrumentType instrumentType;
     @JsonProperty("buySell")
     BuySell buySell;
-    @JsonProperty("symbol")
-    String symbol;
+    @JsonProperty("stockCode")
+    String stockCode;
+
+
     @JsonProperty("exchangeSegment")
     ExchangeSegment exchangeSegment;
     @JsonProperty("entryPrice")
@@ -89,6 +90,14 @@ public class Recommendation {
         this.buySell = buySell;
     }
 
+    public InstrumentType getInstrumentType() {
+        return instrumentType;
+    }
+
+    public void setInstrumentType(InstrumentType instrumentType) {
+        this.instrumentType = instrumentType;
+    }
+
     public ExchangeSegment getExchangeSegment() {
         return exchangeSegment;
     }
@@ -138,15 +147,13 @@ public class Recommendation {
     }
 
 
-    public String getSymbol() {
-        return symbol;
+    public String getStockCode() {
+        return stockCode;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
     }
-
-
 
     public Boolean getActive() {
         return active;

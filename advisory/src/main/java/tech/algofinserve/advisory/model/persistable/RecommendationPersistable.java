@@ -1,10 +1,7 @@
 package tech.algofinserve.advisory.model.persistable;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-import tech.algofinserve.advisory.constants.BuySell;
-import tech.algofinserve.advisory.constants.ExchangeSegment;
-import tech.algofinserve.advisory.constants.RecommendationStatus;
-import tech.algofinserve.advisory.constants.ScannerName;
+import tech.algofinserve.advisory.constants.*;
 import tech.algofinserve.advisory.model.domain.RecommendationValidity;
 import tech.algofinserve.advisory.model.domain.RecommendedBy;
 
@@ -23,10 +20,10 @@ public class RecommendationPersistable implements Serializable {
 
     BuySell buySell;
 
-    String symbol;
+    String stockCode;
 
     ExchangeSegment exchangeSegment;
-
+    InstrumentType instrumentType;
     String entryPrice;
 
     List<String> targets;
@@ -101,6 +98,14 @@ public class RecommendationPersistable implements Serializable {
         this.exchangeSegment = exchangeSegment;
     }
 
+    public InstrumentType getInstrumentType() {
+        return instrumentType;
+    }
+
+    public void setInstrumentType(InstrumentType instrumentType) {
+        this.instrumentType = instrumentType;
+    }
+
     public String getEntryPrice() {
         return entryPrice;
     }
@@ -142,12 +147,12 @@ public class RecommendationPersistable implements Serializable {
     }
 
 
-    public String getSymbol() {
-        return symbol;
+    public String getStockCode() {
+        return stockCode;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
     }
 
     public RecommendationValidity getRecommendationValidity() {

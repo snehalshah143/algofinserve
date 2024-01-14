@@ -3,6 +3,7 @@ package tech.algofinserve.advisory.model.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class InstrumentTickerAngel extends InstrumentTicker implements Serializable {
 
@@ -106,5 +107,33 @@ public class InstrumentTickerAngel extends InstrumentTicker implements Serializa
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InstrumentTickerAngel that = (InstrumentTickerAngel) o;
+        return token.equals(that.token) && symbol.equals(that.symbol) && name.equals(that.name) && Objects.equals(expiry, that.expiry) && Objects.equals(strike, that.strike) && Objects.equals(lotsize, that.lotsize) && Objects.equals(instrumenttype, that.instrumenttype) && exchSeg.equals(that.exchSeg) && Objects.equals(tickSize, that.tickSize);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(token, symbol, name, expiry, strike, lotsize, instrumenttype, exchSeg, tickSize);
+    }
+
+    @Override
+    public String toString() {
+        return "InstrumentTickerAngel{" +
+                "token='" + token + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", name='" + name + '\'' +
+                ", expiry='" + expiry + '\'' +
+                ", strike='" + strike + '\'' +
+                ", lotsize='" + lotsize + '\'' +
+                ", instrumenttype='" + instrumenttype + '\'' +
+                ", exchSeg='" + exchSeg + '\'' +
+                ", tickSize='" + tickSize + '\'' +
+                '}';
     }
 }
