@@ -1,18 +1,29 @@
 package tech.algofinserve.advisory.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.model.domain.Recommendation;
 import tech.algofinserve.advisory.model.domain.RecommendedBy;
+import tech.algofinserve.advisory.model.domain.Ticker;
 
 import java.util.Date;
 
 @Component
 public class RecommendationHelper {
 
+    @Autowired
+    TickerHelper tickerHelper;
+
     public void buildRecommendationDomainEntity(Recommendation recommendation){
+
+       if(recommendation.getTicker() ==null ){
+           Ticker ticker=tickerHelper.constructTickerFromRecommendation(recommendation);
+           recommendation.setTicker(ticker);
+       }
+
         if(recommendation.getActive()==null){
             recommendation.setActive(true);
         }

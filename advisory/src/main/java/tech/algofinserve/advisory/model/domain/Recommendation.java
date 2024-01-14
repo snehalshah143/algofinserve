@@ -22,6 +22,9 @@ public class Recommendation {
     @JsonProperty("stockCode")
     String stockCode;
 
+    @JsonProperty("ticker")
+    Ticker ticker;
+
 
     @JsonProperty("exchangeSegment")
     ExchangeSegment exchangeSegment;
@@ -229,5 +232,13 @@ public class Recommendation {
 
     public void setRecommendationValidity(RecommendationValidity recommendationValidity) {
         this.recommendationValidity = recommendationValidity;
+    }
+
+    public Ticker getTicker() {
+        return ticker;
+    }
+
+    public void setTicker(Ticker ticker) {
+        this.ticker = ticker;
     }
 }

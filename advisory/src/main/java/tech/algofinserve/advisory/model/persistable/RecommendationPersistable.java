@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import tech.algofinserve.advisory.constants.*;
 import tech.algofinserve.advisory.model.domain.RecommendationValidity;
 import tech.algofinserve.advisory.model.domain.RecommendedBy;
+import tech.algofinserve.advisory.model.domain.Ticker;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +22,8 @@ public class RecommendationPersistable implements Serializable {
     BuySell buySell;
 
     String stockCode;
+
+    Ticker ticker;
 
     ExchangeSegment exchangeSegment;
     InstrumentType instrumentType;
@@ -237,5 +240,13 @@ public class RecommendationPersistable implements Serializable {
 
     public void setRecommendationTimeframe(RecommendationValidity recommendationTimeframe) {
         this.recommendationTimeframe = recommendationTimeframe;
+    }
+
+    public Ticker getTicker() {
+        return ticker;
+    }
+
+    public void setTicker(Ticker ticker) {
+        this.ticker = ticker;
     }
 }

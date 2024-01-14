@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class RecommendationServiceImpl implements RecommendationService{
 
-    private Map<Ticker, List<Recommendation>> stockWiseRecommendationsMap=new ConcurrentHashMap<>();
+    private Map<String, List<Recommendation>> stockWiseRecommendationsMap=new ConcurrentHashMap<>();
 
     @Autowired
     RecommendationRepository recommendationRepository;
@@ -29,53 +29,50 @@ public class RecommendationServiceImpl implements RecommendationService{
     @Autowired
     RecommendationHelper recommendationHelper;
 
-    @Autowired
-    TickerHelper tickerHelper;
 public RecommendationPersistable saveRecommendation(Recommendation recommendation){
      recommendationHelper.buildRecommendationDomainEntity(recommendation);
-    addRecommendation(tickerHelper.constructTickerFromRecommendation(recommendation),recommendation);
+    addRecommendation(recommendation.getStockCode(),recommendation);
     RecommendationPersistable recommendationPersistable=recommendationMapper.mapDomainToPersistable(recommendation);
     return   recommendationRepository.save(recommendationPersistable);
 }
 
 
 
-    public Map<Ticker, List<Recommendation>> getAllRecommendations(){
+    public Map<String, List<Recommendation>> getAllRecommendations(){
 
         if(stockWiseRecommendationsMap.isEmpty()){
             List<Recommendation> allRecommendations= recommendationRepository.findAll().stream().map(p->recommendationMapper.mapPersistableToDomain(p)).collect(Collectors.toList());
             allRecommendations.stream().forEach(p->{
-                Ticker ticker=tickerHelper.constructTickerFromRecommendation(p);
 
-                addRecommendationToMap(ticker,p);
+                addRecommendationToMap(p.getStockCode(),p);
             });
         }
 
         return stockWiseRecommendationsMap;
     }
 
-    public void addRecommendation(Ticker ticker,Recommendation recommendation){
+    public void addRecommendation(String stockCode,Recommendation recommendation){
 
-        addRecommendationToMap(ticker, recommendation);
+        addRecommendationToMap(stockCode, recommendation);
     }
-    private void addRecommendationToMap(Ticker ticker, Recommendation recommendation) {
-        if(stockWiseRecommendationsMap.containsKey(ticker)){
-            stockWiseRecommendationsMap.get(ticker).add(recommendation);
+    private void addRecommendationToMap(String stockCode, Recommendation recommendation) {
+        if(stockWiseRecommendationsMap.containsKey(stockCode)){
+            stockWiseRecommendationsMap.get(stockCode).add(recommendation);
 
         }else{
             List<Recommendation> recommendations=new ArrayList<>();
             recommendations.add(recommendation);
-            stockWiseRecommendationsMap.put(ticker,recommendations);
+            stockWiseRecommendationsMap.put(stockCode,recommendations);
         }
     }
 
-    public List<Recommendation> getAllRecommendationsForStockName(Ticker ticker){
-        if(!stockWiseRecommendationsMap.containsKey(ticker)){
-            List<Recommendation> recommendationList=recommendationRepository.findRecommendationsByStockName(ticker.getStockCode())
+    public List<Recommendation> getAllRecommendationsForStockName(String stockCode){
+        if(!stockWiseRecommendationsMap.containsKey(stockCode)){
+            List<Recommendation> recommendationList=recommendationRepository.findRecommendationsByStockName(stockCode)
                     .stream().map(p->recommendationMapper.mapPersistableToDomain(p)).collect(Collectors.toList());
-            stockWiseRecommendationsMap.put(ticker,recommendationList);
+            stockWiseRecommendationsMap.put(stockCode,recommendationList);
         }
-        return stockWiseRecommendationsMap.get(ticker);
+        return stockWiseRecommendationsMap.get(stockCode);
     }
 
 }

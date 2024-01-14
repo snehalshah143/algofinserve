@@ -11,9 +11,9 @@ public interface RecommendationService {
 
     RecommendationPersistable saveRecommendation(Recommendation recommendation);
 
-    public Map<Ticker, List<Recommendation>> getAllRecommendations();
-
-    List<Recommendation> getAllRecommendationsForStockName(Ticker ticker);
+    Map<String, List<Recommendation>> getAllRecommendations();
+    void addRecommendation(String stockCode,Recommendation recommendation);
+    List<Recommendation> getAllRecommendationsForStockName(String stockCode);
 
 
 
