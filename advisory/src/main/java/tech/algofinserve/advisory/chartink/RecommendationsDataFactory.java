@@ -8,10 +8,12 @@ import tech.algofinserve.advisory.model.domain.Ticker;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-@Component
-public class RecommendationsFactory {
+import java.util.concurrent.ConcurrentHashMap;
 
-    public static Map<Ticker, List<Recommendation>> stockWiseRecommendationsList=new HashMap<>();
-    public static Map<Ticker,List<Recommendation>> stockWiseInActiveRecommendationsList=new HashMap<>();
+@Component
+public class RecommendationsDataFactory {
+
+    public static Map<Ticker, List<Recommendation>> stockWiseRecommendationsList=new ConcurrentHashMap<>();
+
 
 }

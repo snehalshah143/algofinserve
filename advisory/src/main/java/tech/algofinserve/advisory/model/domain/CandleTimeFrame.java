@@ -1,6 +1,6 @@
 package tech.algofinserve.advisory.model.domain;
 
-public enum TimeFrame {
+public enum CandleTimeFrame {
     MIN1,
     MIN5,
     MIN15,

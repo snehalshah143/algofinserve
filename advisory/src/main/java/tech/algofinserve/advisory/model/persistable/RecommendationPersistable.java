@@ -1,11 +1,11 @@
 package tech.algofinserve.advisory.model.persistable;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 import tech.algofinserve.advisory.constants.BuySell;
+import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.constants.RecommendationStatus;
-import tech.algofinserve.advisory.constants.StockSegment;
-import tech.algofinserve.advisory.model.domain.RecommendationTimeFrame;
+import tech.algofinserve.advisory.constants.ScannerName;
+import tech.algofinserve.advisory.model.domain.RecommendationValidity;
 import tech.algofinserve.advisory.model.domain.RecommendedBy;
 
 import java.io.Serializable;
@@ -25,7 +25,7 @@ public class RecommendationPersistable implements Serializable {
 
     String symbol;
 
-    StockSegment stockSegment;
+    ExchangeSegment exchangeSegment;
 
     String entryPrice;
 
@@ -42,11 +42,11 @@ public class RecommendationPersistable implements Serializable {
 
     String expectedGainInPercent;
 
-    RecommendationTimeFrame recommendationTimeFrame;
+    RecommendationValidity recommendationValidity;
 
     RecommendedBy recommendedBy;
 
-    String recommendationBasedOnScanner;
+    ScannerName scannerName;
 
     Date updatedDate;
 
@@ -59,7 +59,7 @@ public class RecommendationPersistable implements Serializable {
 
     String actualGainInPercent;
 
-    RecommendationTimeFrame recommendationTimeframe;
+    RecommendationValidity recommendationTimeframe;
 
     public Date getUpdatedDate() {
         return updatedDate;
@@ -93,13 +93,12 @@ public class RecommendationPersistable implements Serializable {
         this.buySell = buySell;
     }
 
-
-    public StockSegment getStockSegment() {
-        return stockSegment;
+    public ExchangeSegment getExchangeSegment() {
+        return exchangeSegment;
     }
 
-    public void setStockSegment(StockSegment stockSegment) {
-        this.stockSegment = stockSegment;
+    public void setExchangeSegment(ExchangeSegment exchangeSegment) {
+        this.exchangeSegment = exchangeSegment;
     }
 
     public String getEntryPrice() {
@@ -151,12 +150,12 @@ public class RecommendationPersistable implements Serializable {
         this.symbol = symbol;
     }
 
-    public RecommendationTimeFrame getRecommendationTimeFrame() {
-        return recommendationTimeFrame;
+    public RecommendationValidity getRecommendationValidity() {
+        return recommendationValidity;
     }
 
-    public void setRecommendationTimeFrame(RecommendationTimeFrame recommendationTimeFrame) {
-        this.recommendationTimeFrame = recommendationTimeFrame;
+    public void setRecommendationValidity(RecommendationValidity recommendationValidity) {
+        this.recommendationValidity = recommendationValidity;
     }
 
     public Boolean getActive() {
@@ -187,12 +186,12 @@ public class RecommendationPersistable implements Serializable {
         this.recommendedBy = recommendedBy;
     }
 
-    public String getRecommendationBasedOnScanner() {
-        return recommendationBasedOnScanner;
+    public ScannerName getScannerName() {
+        return scannerName;
     }
 
-    public void setRecommendationBasedOnScanner(String recommendationBasedOnScanner) {
-        this.recommendationBasedOnScanner = recommendationBasedOnScanner;
+    public void setScannerName(ScannerName scannerName) {
+        this.scannerName = scannerName;
     }
 
     public Date getRecommendedDate() {
@@ -227,11 +226,11 @@ public class RecommendationPersistable implements Serializable {
         this.actualGainInPercent = actualGainInPercent;
     }
 
-    public RecommendationTimeFrame getRecommendationTimeframe() {
+    public RecommendationValidity getRecommendationTimeframe() {
         return recommendationTimeframe;
     }
 
-    public void setRecommendationTimeframe(RecommendationTimeFrame recommendationTimeframe) {
+    public void setRecommendationTimeframe(RecommendationValidity recommendationTimeframe) {
         this.recommendationTimeframe = recommendationTimeframe;
     }
 }

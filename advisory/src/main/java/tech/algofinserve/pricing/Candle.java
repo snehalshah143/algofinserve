@@ -1,7 +1,7 @@
 package tech.algofinserve.pricing;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import tech.algofinserve.advisory.model.domain.TimeFrame;
+import tech.algofinserve.advisory.model.domain.CandleTimeFrame;
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ public class Candle {
     long candleNum;
 
     @JsonProperty("timeFrame")
-    private TimeFrame timeFrame;
+    private CandleTimeFrame timeFrame;
     @JsonProperty("symbol")
     private String symbol;
     @JsonProperty("series")

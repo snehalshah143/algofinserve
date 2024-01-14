@@ -1,10 +1,8 @@
 package tech.algofinserve.advisory.model.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import tech.algofinserve.advisory.constants.StockSegment;
+import tech.algofinserve.advisory.constants.ExchangeSegment;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
@@ -15,10 +13,10 @@ public class StockData  {
     private Long candleNum;
 
 
-    private TimeFrame timeFrame;
+    private CandleTimeFrame timeFrame;
 
     private String symbol;
-    private StockSegment stockSegment;
+    private ExchangeSegment exchangeSegment;
 
     private Date timestamp;
 
@@ -166,11 +164,11 @@ public class StockData  {
         this.candleNum = candleNum;
     }
 
-    public TimeFrame getTimeFrame() {
+    public CandleTimeFrame getTimeFrame() {
         return timeFrame;
     }
 
-    public void setTimeFrame(TimeFrame timeFrame) {
+    public void setTimeFrame(CandleTimeFrame timeFrame) {
         this.timeFrame = timeFrame;
     }
 
@@ -550,11 +548,11 @@ public class StockData  {
         this.openInterest = openInterest;
     }
 
-    public StockSegment getStockSegment() {
-        return stockSegment;
+    public ExchangeSegment getExchangeSegment() {
+        return exchangeSegment;
     }
 
-    public void setStockSegment(StockSegment stockSegment) {
-        this.stockSegment = stockSegment;
+    public void setExchangeSegment(ExchangeSegment exchangeSegment) {
+        this.exchangeSegment = exchangeSegment;
     }
 }

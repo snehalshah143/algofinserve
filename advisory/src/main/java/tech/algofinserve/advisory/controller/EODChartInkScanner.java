@@ -2,9 +2,10 @@ package tech.algofinserve.advisory.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import tech.algofinserve.advisory.chartink.TotalStocksDataFactory;
 import tech.algofinserve.advisory.infra.ChartInkInfra;
 import tech.algofinserve.advisory.chartink.ScannerListFactory;
-import tech.algofinserve.advisory.chartink.TotalStocksRepository;
+
 import tech.algofinserve.advisory.model.domain.ChartInkScanRecord;
 import tech.algofinserve.advisory.model.domain.Ticker;
 import tech.algofinserve.advisory.util.ConversionUtil;
@@ -30,8 +31,8 @@ public class EODChartInkScanner {
                infra.getStocksListForScannerCondition(ScannerListFactory.getAllScanClauseMap().get(Snehal_Monthly_BUY_Base_Stock_List));
 
        ArrayList<Ticker> tickerList= (ArrayList<Ticker>) chartInkRecords.stream().map(p->conversionUtil.convertChartInkRecordToTicker(p)).collect(Collectors.toList());
-       TotalStocksRepository.allStockInformationList.addAll(tickerList);
-        TotalStocksRepository.monthlyBaseStockList.addAll(chartInkRecords.stream().map(p->p.getNseCode()).collect(Collectors.toList()));
+       TotalStocksDataFactory.allStockInformationList.addAll(tickerList);
+        TotalStocksDataFactory.monthlyBaseStockList.addAll(chartInkRecords.stream().map(p->p.getNseCode()).collect(Collectors.toList()));
 
 
    }

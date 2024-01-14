@@ -2,7 +2,7 @@ package tech.algofinserve.advisory.model.persistable;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import tech.algofinserve.advisory.model.domain.TimeFrame;
+import tech.algofinserve.advisory.model.domain.CandleTimeFrame;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,7 +16,7 @@ public class StockDataPersistable implements Serializable {
     private Long candleNum;
 
 
-    private TimeFrame timeFrame;
+    private CandleTimeFrame timeFrame;
 
     private String symbol;
 
@@ -166,11 +166,11 @@ public class StockDataPersistable implements Serializable {
         this.candleNum = candleNum;
     }
 
-    public TimeFrame getTimeFrame() {
+    public CandleTimeFrame getTimeFrame() {
         return timeFrame;
     }
 
-    public void setTimeFrame(TimeFrame timeFrame) {
+    public void setTimeFrame(CandleTimeFrame timeFrame) {
         this.timeFrame = timeFrame;
     }
 

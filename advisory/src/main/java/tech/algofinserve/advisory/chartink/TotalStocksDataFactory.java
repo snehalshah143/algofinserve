@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class TotalStocksRepository {
+public class TotalStocksDataFactory {
 
     public static List<Ticker> allStockInformationList=new ArrayList<>();
     public static List<String> monthlyBaseStockList=new ArrayList<>();

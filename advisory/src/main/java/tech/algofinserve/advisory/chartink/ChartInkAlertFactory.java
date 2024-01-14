@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class StockAlertRepository {
+public class ChartInkAlertFactory {
 
 
-    private StockAlertRepository(){
+    private void ChartInkAlertDataFactory(){
 
     }
     //scanName vrs stockAlert List

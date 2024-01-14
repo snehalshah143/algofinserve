@@ -1,36 +1,37 @@
-package tech.algofinserve.pricing;
+package tech.algofinserve.advisory.model.persistable;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class AngelInstrument {
-
-
-    @JsonProperty("token")
+import java.io.Serializable;
+@Document(collection = "instrument_ticker_angel")
+public class InstrumentTickerAngelPersistable implements Serializable {
+@Id
     private String token;
 
-    @JsonProperty("symbol")
+
     private String symbol;
 
-    @JsonProperty("name")
+
     private String name;
 
-    @JsonProperty("expiry")
+
     private String expiry;
 
-    @JsonProperty("strike")
+
     private String strike;
 
-    @JsonProperty("lotsize")
+
     private String lotsize;
 
 
-    @JsonProperty("instrumenttype")
+
     private String instrumenttype;
 
-    @JsonProperty("exch_seg")
+
     private String exchSeg;
 
-    @JsonProperty("tick_size")
+
     private String tickSize;
 
 

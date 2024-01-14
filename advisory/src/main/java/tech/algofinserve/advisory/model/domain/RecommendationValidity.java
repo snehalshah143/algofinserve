@@ -1,6 +1,6 @@
 package tech.algofinserve.advisory.model.domain;
 
-public enum RecommendationTimeFrame {
+public enum RecommendationValidity {
 
     INTRADAY("1 Day"),
     MOMENTUM("3-5 Days"),
@@ -10,17 +10,17 @@ public enum RecommendationTimeFrame {
     LONG_TERM("1 Year");
 
     private final  String value;
-    private RecommendationTimeFrame(String value){
+    private RecommendationValidity(String value){
         this.value=value;
 
     }
     public String value(){return this.value;}
 
-    public RecommendationTimeFrame fromValue(String value){
-        RecommendationTimeFrame[] recommendationTimeframes=values();
+    public RecommendationValidity fromValue(String value){
+        RecommendationValidity[] recommendationTimeframes=values();
 
         for(int i = 0; i < recommendationTimeframes.length; ++i) {
-            RecommendationTimeFrame c = recommendationTimeframes[i];
+            RecommendationValidity c = recommendationTimeframes[i];
             if (c.value.equals(value)) {
                 return c;
             }

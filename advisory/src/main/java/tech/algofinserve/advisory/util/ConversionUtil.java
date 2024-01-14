@@ -7,10 +7,13 @@ import tech.algofinserve.advisory.model.domain.Ticker;
 public class ConversionUtil {
 
     public Ticker convertChartInkRecordToTicker(ChartInkScanRecord chartInkScanRecord){
+        //Need to Revisit
         Ticker ticker=new Ticker();
-        ticker.setStockName(chartInkScanRecord.getStockName());
-        ticker.setNseCode(chartInkScanRecord.getNseCode());
-        ticker.setBseCode(chartInkScanRecord.getBseCode());
+        ticker.setStockCode(chartInkScanRecord.getStockName());
+       ticker.setExchangeCode(chartInkScanRecord.getNseCode());
+
         return ticker;
     }
+
+
 }

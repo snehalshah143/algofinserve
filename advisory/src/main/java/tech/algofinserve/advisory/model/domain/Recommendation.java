@@ -2,8 +2,10 @@ package tech.algofinserve.advisory.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import tech.algofinserve.advisory.constants.BuySell;
+import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.constants.RecommendationStatus;
-import tech.algofinserve.advisory.constants.StockSegment;
+import tech.algofinserve.advisory.constants.ScannerName;
+
 
 import java.util.Date;
 import java.util.List;
@@ -20,8 +22,8 @@ public class Recommendation {
     BuySell buySell;
     @JsonProperty("symbol")
     String symbol;
-    @JsonProperty("stockSegment")
-    StockSegment stockSegment;
+    @JsonProperty("exchangeSegment")
+    ExchangeSegment exchangeSegment;
     @JsonProperty("entryPrice")
     String entryPrice;
     @JsonProperty("targets")
@@ -39,8 +41,8 @@ public class Recommendation {
     String expectedGainInPercent;
     @JsonProperty("recommendedBy")
     RecommendedBy recommendedBy;
-    @JsonProperty("recommendationBasedOnScanner")
-    String recommendationBasedOnScanner;
+    @JsonProperty("scannerName")
+    ScannerName scannerName;
     @JsonProperty("updatedDate")
     Date updatedDate;
     @JsonProperty("updatedStatus")
@@ -52,8 +54,8 @@ public class Recommendation {
     String actualGain;
     @JsonProperty("actualGainInPercent")
     String actualGainInPercent;
-    @JsonProperty("recommendationTimeframe")
-    RecommendationTimeFrame recommendationTimeframe;
+    @JsonProperty("recommendationValidity")
+    RecommendationValidity recommendationValidity;
 
     public Date getUpdatedDate() {
         return updatedDate;
@@ -87,12 +89,12 @@ public class Recommendation {
         this.buySell = buySell;
     }
 
-    public StockSegment getStockSegment() {
-        return stockSegment;
+    public ExchangeSegment getExchangeSegment() {
+        return exchangeSegment;
     }
 
-    public void setStockSegment(StockSegment stockSegment) {
-        this.stockSegment = stockSegment;
+    public void setExchangeSegment(ExchangeSegment exchangeSegment) {
+        this.exchangeSegment = exchangeSegment;
     }
 
     public String getEntryPrice() {
@@ -174,12 +176,12 @@ public class Recommendation {
         this.recommendedBy = recommendedBy;
     }
 
-    public String getRecommendationBasedOnScanner() {
-        return recommendationBasedOnScanner;
+    public ScannerName getScannerName() {
+        return scannerName;
     }
 
-    public void setRecommendationBasedOnScanner(String recommendationBasedOnScanner) {
-        this.recommendationBasedOnScanner = recommendationBasedOnScanner;
+    public void setScannerName(ScannerName scannerName) {
+        this.scannerName = scannerName;
     }
 
     public Date getRecommendedDate() {
@@ -214,11 +216,11 @@ public class Recommendation {
         this.actualGainInPercent = actualGainInPercent;
     }
 
-    public RecommendationTimeFrame getRecommendationTimeframe() {
-        return recommendationTimeframe;
+    public RecommendationValidity getRecommendationValidity() {
+        return recommendationValidity;
     }
 
-    public void setRecommendationTimeframe(RecommendationTimeFrame recommendationTimeframe) {
-        this.recommendationTimeframe = recommendationTimeframe;
+    public void setRecommendationValidity(RecommendationValidity recommendationValidity) {
+        this.recommendationValidity = recommendationValidity;
     }
 }

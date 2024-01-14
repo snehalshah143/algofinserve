@@ -1,8 +1,9 @@
-package tech.algofinserve.advisory;
+package tech.algofinserve.advisory.util;
 
 import org.springframework.stereotype.Component;
-import org.ta4j.core.indicators.DoubleEMAIndicator;
-import tech.algofinserve.advisory.constants.StockSegment;
+
+
+import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.model.domain.Recommendation;
 import tech.algofinserve.advisory.model.domain.RecommendedBy;
 
@@ -41,8 +42,8 @@ public class RecommendationHelper {
             recommendation.setExpectedGainInPercent(String.valueOf(expectedGainPercent));
         }
 
-        if(recommendation.getStockSegment()==null){
-            recommendation.setStockSegment(StockSegment.CASH);
+        if(recommendation.getExchangeSegment()==null){
+            recommendation.setExchangeSegment(ExchangeSegment.NSE);
         }
 
 

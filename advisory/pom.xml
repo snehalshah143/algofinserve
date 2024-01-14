@@ -266,6 +266,12 @@
 		</dependency>
 		<!-- Only FOr Smart API 2.2.3-->
 
+		<!-- For Open CSV writing file-->
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.1</version>
+		</dependency>
 
 	</dependencies>
 
