@@ -2,8 +2,7 @@ package tech.algofinserve.advisory.model.persistable;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import tech.algofinserve.advisory.constants.*;
-import tech.algofinserve.advisory.model.domain.RecommendationValidity;
-import tech.algofinserve.advisory.model.domain.RecommendedBy;
+import tech.algofinserve.advisory.constants.RecommendedBy;
 import tech.algofinserve.advisory.model.domain.Ticker;
 
 import java.io.Serializable;

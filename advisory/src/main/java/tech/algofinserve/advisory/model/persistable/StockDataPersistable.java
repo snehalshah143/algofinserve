@@ -2,23 +2,34 @@ package tech.algofinserve.advisory.model.persistable;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import tech.algofinserve.advisory.model.domain.CandleTimeFrame;
+import tech.algofinserve.advisory.constants.CandleTimeFrame;
+import tech.algofinserve.advisory.constants.ExchangeSegment;
+import tech.algofinserve.advisory.constants.InstrumentType;
+import tech.algofinserve.advisory.model.domain.Candle;
 
 import java.io.Serializable;
 import java.util.Date;
-@Document(collection = "stock_data")
-public class StockDataPersistable implements Serializable {
-    public StockDataPersistable() {}
-  @Id
-    private Long id;
+//@Document(collection = "stock_data_daily")
+public abstract class StockDataPersistable implements Serializable {
+    public StockDataPersistable(CandleTimeFrame candleTimeFrame) {
+
+        this.candleTimeFrame=candleTimeFrame;
+    }
 
 
     private Long candleNum;
 
 
-    private CandleTimeFrame timeFrame;
+    private CandleTimeFrame candleTimeFrame;
 
     private String symbol;
+
+    private ExchangeSegment exchangeSegment;
+
+
+    private InstrumentType instrumentType;
+
+
 
     private Date timestamp;
 
@@ -150,13 +161,6 @@ public class StockDataPersistable implements Serializable {
     private Long openInterest;
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getCandleNum() {
         return candleNum;
@@ -166,12 +170,12 @@ public class StockDataPersistable implements Serializable {
         this.candleNum = candleNum;
     }
 
-    public CandleTimeFrame getTimeFrame() {
-        return timeFrame;
+    public CandleTimeFrame getCandleTimeFrame() {
+        return candleTimeFrame;
     }
 
-    public void setTimeFrame(CandleTimeFrame timeFrame) {
-        this.timeFrame = timeFrame;
+    public void setCandleTimeFrame(CandleTimeFrame candleTimeFrame) {
+        this.candleTimeFrame = candleTimeFrame;
     }
 
     public String getSymbol() {
@@ -548,5 +552,21 @@ public class StockDataPersistable implements Serializable {
 
     public void setOpenInterest(Long openInterest) {
         this.openInterest = openInterest;
+    }
+
+    public ExchangeSegment getExchangeSegment() {
+        return exchangeSegment;
+    }
+
+    public void setExchangeSegment(ExchangeSegment exchangeSegment) {
+        this.exchangeSegment = exchangeSegment;
+    }
+
+    public InstrumentType getInstrumentType() {
+        return instrumentType;
+    }
+
+    public void setInstrumentType(InstrumentType instrumentType) {
+        this.instrumentType = instrumentType;
     }
 }

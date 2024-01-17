@@ -15,6 +15,6 @@ public interface MetaDataService {
 
     public void deleteAllInstrumentTicker();
     public Map<String,InstrumentTickerAngel> getInstrumentTickerMapForExchangeSegment(ExchangeSegment exchangeSegment);
-    public InstrumentTickerAngel getInstrumentTickerForStockName(String tickerName, ExchangeSegment exchangeSegment);
+    public InstrumentTickerAngel getInstrumentTickerForStockName(String stockName, ExchangeSegment exchangeSegment);
 
     }

@@ -1,20 +1,26 @@
-package tech.algofinserve.pricing;
+package tech.algofinserve.advisory.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import tech.algofinserve.advisory.model.domain.CandleTimeFrame;
+import tech.algofinserve.advisory.constants.CandleTimeFrame;
+import tech.algofinserve.advisory.constants.ExchangeSegment;
+import tech.algofinserve.advisory.constants.InstrumentType;
 
 import java.util.Date;
 
 public class Candle {
-
-    long candleNum;
+//NOT TO USE THIS CLASS
+ /*   long candleNum;
 
     @JsonProperty("timeFrame")
     private CandleTimeFrame timeFrame;
     @JsonProperty("symbol")
     private String symbol;
-    @JsonProperty("series")
-    private String series;
+    @JsonProperty("exchangeSegment")
+    private ExchangeSegment exchangeSegment;
+
+    @JsonProperty("exchangeSegment")
+    private InstrumentType instrumentType;
+
     @JsonProperty("timestamp")
     private Date timestamp;
     @JsonProperty("open")
@@ -29,5 +35,5 @@ public class Candle {
     private long volume;
 
 
-
+*/
 }

@@ -147,9 +147,9 @@ private final String ANGEL_ALL_INSTRUMENT_FILE_CSV="src/main/resources/all_instr
     }
 
 
-    public InstrumentTickerAngel getInstrumentTickerForStockName(String tickerName,ExchangeSegment exchangeSegment){
+    public InstrumentTickerAngel getInstrumentTickerForStockName(String stockName,ExchangeSegment exchangeSegment){
 
-        return getInstrumentTickerMapForExchangeSegment(exchangeSegment).get(tickerName);
+        return getInstrumentTickerMapForExchangeSegment(exchangeSegment).get(stockName);
     }
 
    public void writeDataToFile(String fileLocation,Class typeOfObject,List dataList) {

@@ -1,4 +1,4 @@
-package tech.algofinserve.advisory.model.domain;
+package tech.algofinserve.advisory.constants;
 
 public enum RecommendationValidity {
 

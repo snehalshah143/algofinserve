@@ -9,7 +9,6 @@ public enum BuySell {
     EXIT,
     SQUAREOFF_LONG,
 
-    COVER_SHORT
-    ;
+    COVER_SHORT;
 
 }

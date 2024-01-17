@@ -1,4 +1,4 @@
-package tech.algofinserve.advisory.processing;
+package tech.algofinserve.advisory.core;
 
 import org.springframework.stereotype.Component;
 import tech.algofinserve.advisory.chartink.ChartInkAlertFactory;

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import tech.algofinserve.advisory.model.domain.Alert;
-import tech.algofinserve.advisory.processing.ChartInkAlertProcessingEngine;
+import tech.algofinserve.advisory.core.ChartInkAlertProcessingEngine;
 
 @RestController
 public class ChartinkController {

@@ -1,21 +1,22 @@
 package tech.algofinserve.advisory.chartink;
 
 import org.springframework.stereotype.Component;
+import tech.algofinserve.advisory.constants.ScannerName;
 
 import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 @Component
-public class ScannerListFactory {
+public class ChartInkScannerListFactory {
 
-
+private static String baseScannerForAllEligibleStocks="Snehal_BUY_Monthly_MULTIBAGGERBASE";
     private static Map<String,String> liveHoulyScanClauseMap=new HashMap<>();
-    private static Map<String,String> liveDailyScanClauseMap=new HashMap<>();
-    private static Map<String,String> liveWeeklyScanClauseMap=new HashMap<>();
-    private static Map<String,String> liveMonthlyScanClauseMap=new HashMap<>();
+    private static Map<ScannerName,String> liveDailyScanClauseMap=new HashMap<>();
+    private static Map<ScannerName,String> liveWeeklyScanClauseMap=new HashMap<>();
+    private static Map<ScannerName,String> liveMonthlyScanClauseMap=new HashMap<>();
 
-    private static Map<String,String> allScanClauseMap=new HashMap<>();
+    private static Map<ScannerName,String> allScanClauseMap=new HashMap<>();
 
     @PostConstruct
 public void init(){
@@ -46,11 +47,11 @@ public void init(){
                 continue;
             }
         String[] arr= line.split(":");
-            allScanClauseMap.put(arr[0],arr[1]);
+            allScanClauseMap.put(ScannerName.valueOf(arr[0]),arr[1]);
     }
     }
 
-    public static Map<String, String> getLiveWeeklyscanClauseMap() {
+    public static Map<ScannerName, String> getLiveWeeklyscanClauseMap() {
 
       if(liveWeeklyScanClauseMap==null){
           liveWeeklyScanClauseMap=new HashMap<>();
@@ -60,7 +61,7 @@ public void init(){
       return liveWeeklyScanClauseMap;
     }
 
-    public static Map<String, String> getLiveMonthlyScanClauseMap() {
+    public static Map<ScannerName, String> getLiveMonthlyScanClauseMap() {
 
         if(liveMonthlyScanClauseMap==null){
             liveMonthlyScanClauseMap=new HashMap<>();
@@ -70,7 +71,7 @@ public void init(){
         return liveMonthlyScanClauseMap;
     }
 
-    public static Map<String, String> getAllScanClauseMap() {
+    public static Map<ScannerName, String> getAllScanClauseMap() {
 
         if(allScanClauseMap==null){
             allScanClauseMap=new HashMap<>();

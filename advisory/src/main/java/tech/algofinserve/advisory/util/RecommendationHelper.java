@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.model.domain.Recommendation;
-import tech.algofinserve.advisory.model.domain.RecommendedBy;
+import tech.algofinserve.advisory.constants.RecommendedBy;
 import tech.algofinserve.advisory.model.domain.Ticker;
 
 import java.util.Date;

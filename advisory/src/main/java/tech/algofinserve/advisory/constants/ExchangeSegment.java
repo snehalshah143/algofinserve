@@ -1,7 +1,5 @@
 package tech.algofinserve.advisory.constants;
 
-import tech.algofinserve.advisory.model.domain.RecommendationValidity;
-
 public enum ExchangeSegment {
     NSE("NSE"),
     BSE("BSE"),

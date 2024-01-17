@@ -1,15 +1,31 @@
 package tech.algofinserve.advisory.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
+import tech.algofinserve.advisory.constants.CandleTimeFrame;
 import tech.algofinserve.advisory.constants.ExchangeSegment;
+import tech.algofinserve.advisory.constants.InstrumentType;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class StockData  {
-    public StockData() {}
-  @Id
+public abstract class StockData implements Serializable {
+
+    @Id
     private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public StockData(CandleTimeFrame timeFrame){
+        this.timeFrame=timeFrame;
+    }
+
     private Long candleNum;
 
 
@@ -17,6 +33,9 @@ public class StockData  {
 
     private String symbol;
     private ExchangeSegment exchangeSegment;
+
+
+    private InstrumentType instrumentType;
 
     private Date timestamp;
 
@@ -148,13 +167,8 @@ public class StockData  {
     private Long openInterest;
 
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
 
     public Long getCandleNum() {
         return candleNum;
@@ -554,5 +568,13 @@ public class StockData  {
 
     public void setExchangeSegment(ExchangeSegment exchangeSegment) {
         this.exchangeSegment = exchangeSegment;
+    }
+
+    public InstrumentType getInstrumentType() {
+        return instrumentType;
+    }
+
+    public void setInstrumentType(InstrumentType instrumentType) {
+        this.instrumentType = instrumentType;
     }
 }

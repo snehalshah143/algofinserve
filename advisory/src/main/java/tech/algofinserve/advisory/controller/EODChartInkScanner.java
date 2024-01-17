@@ -2,10 +2,10 @@ package tech.algofinserve.advisory.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import tech.algofinserve.advisory.chartink.TotalStocksDataFactory;
+import tech.algofinserve.advisory.chartink.AllStocksDataFactory;
+import tech.algofinserve.advisory.chartink.ChartInkScannerListFactory;
+import tech.algofinserve.advisory.constants.ScannerName;
 import tech.algofinserve.advisory.infra.ChartInkInfra;
-import tech.algofinserve.advisory.chartink.ScannerListFactory;
-
 import tech.algofinserve.advisory.model.domain.ChartInkScanRecord;
 import tech.algofinserve.advisory.model.domain.Ticker;
 import tech.algofinserve.advisory.util.ConversionUtil;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static tech.algofinserve.advisory.constants.ScannerNames.Snehal_Monthly_BUY_Base_Stock_List;
+
 @Component
 public class EODChartInkScanner {
 
@@ -28,11 +28,11 @@ public class EODChartInkScanner {
    public void loadBaseStocks() throws IOException {
 
        Set<ChartInkScanRecord> chartInkRecords=
-               infra.getStocksListForScannerCondition(ScannerListFactory.getAllScanClauseMap().get(Snehal_Monthly_BUY_Base_Stock_List));
+               infra.getStocksListForScannerCondition(ChartInkScannerListFactory.getAllScanClauseMap().get(ScannerName.Snehal_BUY_Monthly_MULTIBAGGERBASE));
 
        ArrayList<Ticker> tickerList= (ArrayList<Ticker>) chartInkRecords.stream().map(p->conversionUtil.convertChartInkRecordToTicker(p)).collect(Collectors.toList());
-       TotalStocksDataFactory.allStockInformationList.addAll(tickerList);
-        TotalStocksDataFactory.monthlyBaseStockList.addAll(chartInkRecords.stream().map(p->p.getNseCode()).collect(Collectors.toList()));
+       AllStocksDataFactory.allStockInformationList.addAll(tickerList);
+        AllStocksDataFactory.monthlyBaseStockList.addAll(chartInkRecords.stream().map(p->p.getNseCode()).collect(Collectors.toList()));
 
 
    }
