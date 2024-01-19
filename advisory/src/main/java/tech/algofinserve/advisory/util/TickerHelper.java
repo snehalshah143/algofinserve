@@ -14,7 +14,7 @@ public class TickerHelper {
     MetaDataService metaDataService;
     public Ticker constructTickerFromRecommendation(Recommendation recommendation){
         Ticker ticker=new Ticker();
-        ticker.setStockCode(recommendation.getStockCode());
+        ticker.setStockSymbol(recommendation.getStockCode());
         ticker.setExchangeSegment(recommendation.getExchangeSegment());
         ticker.setInstrumentType(recommendation.getInstrumentType());
         InstrumentTickerAngel instrumentTickerAngel= metaDataService.getInstrumentTickerForStockName(recommendation.getStockCode(),recommendation.getExchangeSegment());

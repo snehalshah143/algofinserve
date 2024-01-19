@@ -6,9 +6,13 @@ import tech.algofinserve.advisory.constants.CandleTimeFrame;
 import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.constants.InstrumentType;
 import tech.algofinserve.advisory.model.domain.Candle;
+import tech.algofinserve.advisory.model.domain.StockData;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
+
 //@Document(collection = "stock_data_daily")
 public abstract class StockDataPersistable implements Serializable {
     public StockDataPersistable(CandleTimeFrame candleTimeFrame) {
@@ -16,6 +20,15 @@ public abstract class StockDataPersistable implements Serializable {
         this.candleTimeFrame=candleTimeFrame;
     }
 
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     private Long candleNum;
 
@@ -31,7 +44,7 @@ public abstract class StockDataPersistable implements Serializable {
 
 
 
-    private Date timestamp;
+    private LocalDateTime timestamp;
 
     private Double open;
 
@@ -186,11 +199,11 @@ public abstract class StockDataPersistable implements Serializable {
         this.symbol = symbol;
     }
 
-    public Date getTimestamp() {
+    public LocalDateTime  getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDateTime  timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -569,4 +582,19 @@ public abstract class StockDataPersistable implements Serializable {
     public void setInstrumentType(InstrumentType instrumentType) {
         this.instrumentType = instrumentType;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StockData stockData = (StockData) o;
+        return candleTimeFrame == stockData.getCandleTimeFrame() && symbol.equals(stockData.getSymbol()) && exchangeSegment == stockData.getExchangeSegment() && instrumentType == stockData.getInstrumentType() && timestamp.equals(stockData.getTimestamp());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(candleTimeFrame, symbol, exchangeSegment, instrumentType, timestamp);
+    }
+
 }

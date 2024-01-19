@@ -7,37 +7,41 @@ import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.constants.InstrumentType;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 
 public abstract class StockData implements Serializable {
 
-    @Id
-    private Long id;
 
-    public Long getId() {
+    private String id;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
+
     public StockData(CandleTimeFrame timeFrame){
-        this.timeFrame=timeFrame;
+        this.candleTimeFrame=timeFrame;
     }
 
     private Long candleNum;
 
-
-    private CandleTimeFrame timeFrame;
-
+//Part of composite key
+public CandleTimeFrame candleTimeFrame;
+    //Part of composite key
     private String symbol;
+    //Part of composite key
     private ExchangeSegment exchangeSegment;
 
-
+    //Part of composite key
     private InstrumentType instrumentType;
 
-    private Date timestamp;
+    private LocalDateTime timestamp;
 
     private Double open;
 
@@ -178,12 +182,12 @@ public abstract class StockData implements Serializable {
         this.candleNum = candleNum;
     }
 
-    public CandleTimeFrame getTimeFrame() {
-        return timeFrame;
+    public CandleTimeFrame getCandleTimeFrame() {
+        return candleTimeFrame;
     }
 
-    public void setTimeFrame(CandleTimeFrame timeFrame) {
-        this.timeFrame = timeFrame;
+    public void setCandleTimeFrame(CandleTimeFrame candleTimeFrame) {
+        this.candleTimeFrame = candleTimeFrame;
     }
 
     public String getSymbol() {
@@ -194,11 +198,11 @@ public abstract class StockData implements Serializable {
         this.symbol = symbol;
     }
 
-    public Date getTimestamp() {
+    public LocalDateTime  getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDateTime  timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -576,5 +580,18 @@ public abstract class StockData implements Serializable {
 
     public void setInstrumentType(InstrumentType instrumentType) {
         this.instrumentType = instrumentType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StockData stockData = (StockData) o;
+        return id.equals(stockData.id) && candleTimeFrame == stockData.candleTimeFrame && symbol.equals(stockData.symbol) && exchangeSegment == stockData.exchangeSegment && instrumentType == stockData.instrumentType && timestamp.equals(stockData.timestamp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, candleTimeFrame, symbol, exchangeSegment, instrumentType, timestamp);
     }
 }

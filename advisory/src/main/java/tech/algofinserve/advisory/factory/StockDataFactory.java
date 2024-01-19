@@ -2,19 +2,18 @@ package tech.algofinserve.advisory.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Component;
 import tech.algofinserve.advisory.constants.CandleTimeFrame;
 import tech.algofinserve.advisory.dao.StockData15MinRepository;
 import tech.algofinserve.advisory.dao.StockDataDailyRepository;
 import tech.algofinserve.advisory.model.domain.StockData;
 import tech.algofinserve.advisory.model.domain.StockData15Min;
 import tech.algofinserve.advisory.model.domain.StockDataDaily;
-
+@Component
 public class StockDataFactory {
 @Autowired
-static
 StockData15MinRepository stockData15MinRepository;
 @Autowired
-static
 StockDataDailyRepository stockDataDailyRepository;
     public static  StockData getStockDataObject(CandleTimeFrame candleTimeFrame){
 
@@ -42,7 +41,7 @@ StockDataDailyRepository stockDataDailyRepository;
         }
     }
 
-    public static MongoRepository getStockDataRepository(CandleTimeFrame candleTimeFrame){
+    public MongoRepository getStockDataRepository(CandleTimeFrame candleTimeFrame){
 
         switch (candleTimeFrame) {
             case ONE_DAY:

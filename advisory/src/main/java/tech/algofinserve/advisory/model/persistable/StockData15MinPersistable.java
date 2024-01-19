@@ -12,17 +12,6 @@ import java.util.Date;
 @Document(collection = "stock_data_15min")
 public class StockData15MinPersistable extends StockDataPersistable {
     public StockData15MinPersistable() {super(CandleTimeFrame.FIFTEEN_MINUTE);}
-  @Id
-    private Long id;
 
-
-    public Long getId() {
-        return id;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
 }

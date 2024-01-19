@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Ticker implements Serializable {
     String token;
-    String stockCode;
+    String stockSymbol;
     InstrumentType instrumentType;
     ExchangeSegment exchangeSegment;
 
@@ -27,12 +27,12 @@ public class Ticker implements Serializable {
         this.token = token;
     }
 
-    public String getStockCode() {
-        return stockCode;
+    public String getStockSymbol() {
+        return stockSymbol;
     }
 
-    public void setStockCode(String stockCode) {
-        this.stockCode = stockCode;
+    public void setStockSymbol(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
     }
 
     public InstrumentType getInstrumentType() {
@@ -80,11 +80,11 @@ public class Ticker implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticker ticker = (Ticker) o;
-        return token.equals(ticker.token) && stockCode.equals(ticker.stockCode) && instrumentType == ticker.instrumentType && exchangeSegment == ticker.exchangeSegment && Objects.equals(sector, ticker.sector) && Objects.equals(categorization, ticker.categorization);
+        return token.equals(ticker.token) && stockSymbol.equals(ticker.stockSymbol) && instrumentType == ticker.instrumentType && exchangeSegment == ticker.exchangeSegment && Objects.equals(sector, ticker.sector) && Objects.equals(categorization, ticker.categorization);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(token, stockCode, instrumentType, exchangeSegment, sector, categorization);
+        return Objects.hash(token, stockSymbol, instrumentType, exchangeSegment, sector, categorization);
     }
 }
