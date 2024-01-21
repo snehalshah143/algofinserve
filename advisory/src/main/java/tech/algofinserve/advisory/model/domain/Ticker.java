@@ -15,7 +15,7 @@ public class Ticker implements Serializable {
     InstrumentType instrumentType;
     ExchangeSegment exchangeSegment;
 
-    String exchangeCode;
+    String stockSymbolExch;
     String sector;
     String categorization;
 
@@ -67,12 +67,12 @@ public class Ticker implements Serializable {
         this.categorization = categorization;
     }
 
-    public String getExchangeCode() {
-        return exchangeCode;
+    public String getStockSymbolExch() {
+        return stockSymbolExch;
     }
 
-    public void setExchangeCode(String exchangeCode) {
-        this.exchangeCode = exchangeCode;
+    public void setStockSymbolExch(String stockSymbolExch) {
+        this.stockSymbolExch = stockSymbolExch;
     }
 
     @Override
