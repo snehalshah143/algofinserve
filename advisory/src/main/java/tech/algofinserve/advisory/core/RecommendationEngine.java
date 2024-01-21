@@ -9,4 +9,6 @@ boolean eligibleForTrade(StockAlert stockAlert){
     return true;
 }
 
+
+
 }

@@ -18,10 +18,7 @@ import tech.algofinserve.advisory.mapper.InstrumentTickerAngelMapper;
 import tech.algofinserve.advisory.model.domain.InstrumentTickerAngel;
 import tech.algofinserve.advisory.model.persistable.InstrumentTickerAngelPersistable;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Writer;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
@@ -45,16 +42,52 @@ private final String ANGEL_ALL_INSTRUMENT_FILE_CSV="src/main/resources/all_instr
     @Autowired
     InstrumentTickerAngelMapper instrumentTickerMapper;
 
+    //StockSymbol=StockName
+    private Map<String,String> allChartInkSymbolMetaData=new HashMap<>();
    private Map<ExchangeSegment,Map<String,InstrumentTickerAngel>> instrumentTickerForExchangeMap=new ConcurrentHashMap<>();
+
+//Should Call On Server startup or load from cache
+   public void readALlChartInkSymbolFile(){
+       allChartInkSymbolMetaData.clear();
+       InputStreamReader inputStreamReader;
+       inputStreamReader=new InputStreamReader(getClass().getResourceAsStream("/chartink_symbol_list.csv"));
+       String line = "";
+       String splitBy = ",";
+
+       BufferedReader br = new BufferedReader(inputStreamReader);
+       while (true)   //returns a Boolean value
+       {
+           try {
+               if (!((line = br.readLine()) != null)) break;
+           } catch (IOException e) {
+               throw new RuntimeException(e);
+           }
+           line=line.replaceAll("\"","");
+           String[] stockLine = line.split(splitBy);    // use comma as separator
+
+           allChartInkSymbolMetaData.put(stockLine[2],stockLine[1]);
+
+       }
+
+   }
+
+   public Set<String> getAllChartInkSymbolList(){
+       if(allChartInkSymbolMetaData.isEmpty()){
+           readALlChartInkSymbolFile();
+       }
+       return allChartInkSymbolMetaData.keySet();
+   }
+
+
 
     public void loadInstrumentsTickerFromAPI() {
         deleteAllInstrumentTicker();
 
         InputStreamReader inputStreamReader;
 
-         //   inputStreamReader= readInstrumentTickerFileFromAngelServer();
+        //   inputStreamReader= readInstrumentTickerFileFromAngelServer();
 
-            inputStreamReader=new InputStreamReader(getClass().getResourceAsStream("/OpenAPIScripMaster.json"));
+        inputStreamReader=new InputStreamReader(getClass().getResourceAsStream("/OpenAPIScripMaster.json"));
 
         // map to GSON objects
         JsonElement root = new JsonParser().parse(inputStreamReader);
@@ -73,7 +106,7 @@ private final String ANGEL_ALL_INSTRUMENT_FILE_CSV="src/main/resources/all_instr
                     populateInstrumentTickerForExchangeMap(instrument, instrumentExchangeSegment);
 
                 }catch( IllegalArgumentException e){
-                    
+
 // Do Nothing Ignored
                 }
 

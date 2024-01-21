@@ -9,6 +9,7 @@ import tech.algofinserve.advisory.model.domain.Recommendation;
 import tech.algofinserve.advisory.constants.RecommendedBy;
 import tech.algofinserve.advisory.model.domain.Ticker;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Component
@@ -18,6 +19,10 @@ public class RecommendationHelper {
     TickerHelper tickerHelper;
 
     public void buildRecommendationDomainEntity(Recommendation recommendation){
+
+        if(recommendation.getRecommendationId()==null){
+            recommendation.setRecommendationId(recommendation.getStockSymbol()+recommendation.getRecommendationValidity().value()+System.currentTimeMillis());
+        }
 
        if(recommendation.getTicker() ==null ){
            Ticker ticker=tickerHelper.constructTickerFromRecommendation(recommendation);
@@ -32,11 +37,9 @@ public class RecommendationHelper {
             recommendation.setRecommendedBy(RecommendedBy.SYSTEM);
         }
 
-        if(recommendation.getRecommendationId()==null){
-            recommendation.setRecommendationId(System.currentTimeMillis());
-        }
+
         if(recommendation.getRecommendedDate()==null){
-            recommendation.setRecommendedDate(new Date());
+            recommendation.setRecommendedDate(LocalDateTime.now());
         }
         if(recommendation.getExpectedGain()==null){
             Double maxTargetPrice= Double.valueOf(recommendation.getTargets().get(recommendation.getTargets().size()-1));

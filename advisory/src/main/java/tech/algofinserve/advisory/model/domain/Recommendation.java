@@ -1,33 +1,37 @@
 package tech.algofinserve.advisory.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import tech.algofinserve.advisory.constants.*;
 
-
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Recommendation {
 
     public Recommendation() {}
-    private  Long recommendationId;
+    private  String recommendationId;
     @JsonProperty("recommendedDate")
-    Date recommendedDate;
-
+    LocalDateTime recommendedDate;
+    @NotBlank
     @JsonProperty("instrumentType")
     InstrumentType instrumentType;
+    @NotBlank
     @JsonProperty("buySell")
     BuySell buySell;
-    @JsonProperty("stockCode")
-    String stockCode;
+    @NotBlank
+    @JsonProperty("stockSymbol")
+    String stockSymbol;
 
     @JsonProperty("ticker")
     Ticker ticker;
 
-
     @JsonProperty("exchangeSegment")
     ExchangeSegment exchangeSegment;
+    @NotBlank
     @JsonProperty("entryPrice")
     String entryPrice;
     @JsonProperty("targets")
@@ -58,6 +62,7 @@ public class Recommendation {
     String actualGain;
     @JsonProperty("actualGainInPercent")
     String actualGainInPercent;
+    @NotBlank
     @JsonProperty("recommendationValidity")
     RecommendationValidity recommendationValidity;
 
@@ -77,11 +82,11 @@ public class Recommendation {
         this.updatedStatus = updatedStatus;
     }
 
-    public Long getRecommendationId() {
+    public String getRecommendationId() {
         return recommendationId;
     }
 
-    public void setRecommendationId(Long recommendationId) {
+    public void setRecommendationId(String recommendationId) {
         this.recommendationId = recommendationId;
     }
 
@@ -150,12 +155,12 @@ public class Recommendation {
     }
 
 
-    public String getStockCode() {
-        return stockCode;
+    public String getStockSymbol() {
+        return stockSymbol;
     }
 
-    public void setStockCode(String stockCode) {
-        this.stockCode = stockCode;
+    public void setStockSymbol(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
     }
 
     public Boolean getActive() {
@@ -194,11 +199,11 @@ public class Recommendation {
         this.scannerName = scannerName;
     }
 
-    public Date getRecommendedDate() {
+    public LocalDateTime getRecommendedDate() {
         return recommendedDate;
     }
 
-    public void setRecommendedDate(Date recommendedDate) {
+    public void setRecommendedDate(LocalDateTime recommendedDate) {
         this.recommendedDate = recommendedDate;
     }
 

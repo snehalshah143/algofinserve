@@ -7,7 +7,7 @@ public enum RecommendationValidity {
     POSITIONAL("1 week to 1 Month"),
     SHORT_TERM("3 Months"),
     MEDIUM_TERM("6 Months"),
-    LONG_TERM("1 Year");
+    LONG_TERM("2 Year");
 
     private final  String value;
     private RecommendationValidity(String value){

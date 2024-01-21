@@ -14,10 +14,11 @@ public class TickerHelper {
     MetaDataService metaDataService;
     public Ticker constructTickerFromRecommendation(Recommendation recommendation){
         Ticker ticker=new Ticker();
-        ticker.setStockSymbol(recommendation.getStockCode());
+        ticker.setStockSymbol(recommendation.getStockSymbol());
         ticker.setExchangeSegment(recommendation.getExchangeSegment());
         ticker.setInstrumentType(recommendation.getInstrumentType());
-        InstrumentTickerAngel instrumentTickerAngel= metaDataService.getInstrumentTickerForStockName(recommendation.getStockCode(),recommendation.getExchangeSegment());
+        InstrumentTickerAngel instrumentTickerAngel= metaDataService
+                .getInstrumentTickerForStockName(recommendation.getStockSymbol(),recommendation.getExchangeSegment());
         ticker.setToken(instrumentTickerAngel.getToken());
         return ticker;
     }

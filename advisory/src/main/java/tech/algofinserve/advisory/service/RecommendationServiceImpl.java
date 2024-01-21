@@ -30,8 +30,9 @@ public class RecommendationServiceImpl implements RecommendationService{
     RecommendationHelper recommendationHelper;
 
 public RecommendationPersistable saveRecommendation(Recommendation recommendation){
+
      recommendationHelper.buildRecommendationDomainEntity(recommendation);
-    addRecommendation(recommendation.getStockCode(),recommendation);
+    addRecommendationLocalCache(recommendation.getStockSymbol(),recommendation);
     RecommendationPersistable recommendationPersistable=recommendationMapper.mapDomainToPersistable(recommendation);
     return   recommendationRepository.save(recommendationPersistable);
 }
@@ -44,14 +45,14 @@ public RecommendationPersistable saveRecommendation(Recommendation recommendatio
             List<Recommendation> allRecommendations= recommendationRepository.findAll().stream().map(p->recommendationMapper.mapPersistableToDomain(p)).collect(Collectors.toList());
             allRecommendations.stream().forEach(p->{
 
-                addRecommendationToMap(p.getStockCode(),p);
+                addRecommendationToMap(p.getStockSymbol(),p);
             });
         }
 
         return stockWiseRecommendationsMap;
     }
 
-    public void addRecommendation(String stockCode,Recommendation recommendation){
+    public void addRecommendationLocalCache(String stockCode,Recommendation recommendation){
 
         addRecommendationToMap(stockCode, recommendation);
     }

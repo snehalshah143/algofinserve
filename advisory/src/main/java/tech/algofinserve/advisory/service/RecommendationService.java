@@ -12,7 +12,7 @@ public interface RecommendationService {
     RecommendationPersistable saveRecommendation(Recommendation recommendation);
 
     Map<String, List<Recommendation>> getAllRecommendations();
-    void addRecommendation(String stockCode,Recommendation recommendation);
+    void addRecommendationLocalCache(String stockCode,Recommendation recommendation);
     List<Recommendation> getAllRecommendationsForStockName(String stockCode);
 
 

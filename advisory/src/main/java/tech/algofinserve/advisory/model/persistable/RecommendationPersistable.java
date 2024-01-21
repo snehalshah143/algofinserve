@@ -6,6 +6,7 @@ import tech.algofinserve.advisory.constants.RecommendedBy;
 import tech.algofinserve.advisory.model.domain.Ticker;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,14 +14,14 @@ import java.util.List;
 public class RecommendationPersistable implements Serializable {
 
     public RecommendationPersistable() {}
-    private  Long recommendationId;
+    private  String recommendationId;
 
-    Date recommendedDate;
+    LocalDateTime recommendedDate;
 
 
     BuySell buySell;
 
-    String stockCode;
+    String stockSymbol;
 
     Ticker ticker;
 
@@ -76,11 +77,11 @@ public class RecommendationPersistable implements Serializable {
         this.updatedStatus = updatedStatus;
     }
 
-    public Long getRecommendationId() {
+    public String getRecommendationId() {
         return recommendationId;
     }
 
-    public void setRecommendationId(Long recommendationId) {
+    public void setRecommendationId(String recommendationId) {
         this.recommendationId = recommendationId;
     }
 
@@ -149,12 +150,12 @@ public class RecommendationPersistable implements Serializable {
     }
 
 
-    public String getStockCode() {
-        return stockCode;
+    public String getStockSymbol() {
+        return stockSymbol;
     }
 
-    public void setStockCode(String stockCode) {
-        this.stockCode = stockCode;
+    public void setStockSymbol(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
     }
 
     public RecommendationValidity getRecommendationValidity() {
@@ -201,11 +202,11 @@ public class RecommendationPersistable implements Serializable {
         this.scannerName = scannerName;
     }
 
-    public Date getRecommendedDate() {
+    public LocalDateTime getRecommendedDate() {
         return recommendedDate;
     }
 
-    public void setRecommendedDate(Date recommendedDate) {
+    public void setRecommendedDate(LocalDateTime recommendedDate) {
         this.recommendedDate = recommendedDate;
     }
 
