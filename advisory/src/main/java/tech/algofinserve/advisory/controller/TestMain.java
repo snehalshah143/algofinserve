@@ -13,15 +13,14 @@ import tech.algofinserve.advisory.constants.InstrumentType;
 import tech.algofinserve.advisory.model.domain.StockData;
 import tech.algofinserve.advisory.model.domain.StockDataDaily;
 import tech.algofinserve.advisory.model.domain.Ticker;
-import tech.algofinserve.angel.AngelApiKey;
-import tech.algofinserve.angel.AngelBrokerConnector;
+import tech.algofinserve.infra.AngelApiKey;
+import tech.algofinserve.infra.AngelBrokerConnector;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class TestMain {
 

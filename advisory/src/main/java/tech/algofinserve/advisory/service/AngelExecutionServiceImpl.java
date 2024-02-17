@@ -32,6 +32,7 @@ public class AngelExecutionServiceImpl extends AngelExecutionService{
 if(orderParams.orderid!=null){
      order = smartConnect.modifyOrder(orderParams.orderid, orderParams, Constants.VARIETY_NORMAL);
 }
+
    return order;
     }
 

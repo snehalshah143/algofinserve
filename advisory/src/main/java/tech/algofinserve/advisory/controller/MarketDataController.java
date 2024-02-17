@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ta4j.core.Bar;
-import org.ta4j.core.BarSeries;
 import tech.algofinserve.advisory.constants.CandleTimeFrame;
 import tech.algofinserve.advisory.constants.ExchangeSegment;
 import tech.algofinserve.advisory.constants.InstrumentType;
@@ -15,11 +14,10 @@ import tech.algofinserve.advisory.model.domain.StockData;
 import tech.algofinserve.advisory.model.domain.Ticker;
 import tech.algofinserve.advisory.service.MetaDataService;
 import tech.algofinserve.advisory.util.ConversionUtil;
-import tech.algofinserve.angel.AngelApiKey;
-import tech.algofinserve.angel.AngelBrokerConnector;
+import tech.algofinserve.infra.AngelApiKey;
+import tech.algofinserve.infra.AngelBrokerConnector;
 import tech.algofinserve.advisory.service.AngelMarketDataServiceImpl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 

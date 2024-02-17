@@ -1,16 +1,10 @@
-package tech.algofinserve.angel;
+package tech.algofinserve.infra;
 
 import com.angelbroking.smartapi.SmartConnect;
 import com.angelbroking.smartapi.http.SessionExpiryHook;
-import com.angelbroking.smartapi.http.exceptions.SmartAPIException;
 import com.angelbroking.smartapi.models.TokenSet;
 import com.angelbroking.smartapi.models.User;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-
-import java.io.IOException;
 
 
 public final class AngelBrokerConnector {

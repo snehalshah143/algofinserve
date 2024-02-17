@@ -1,4 +1,4 @@
-package tech.algofinserve.angel;
+package tech.algofinserve.infra;
 
 public class AngelApiKey {
 
