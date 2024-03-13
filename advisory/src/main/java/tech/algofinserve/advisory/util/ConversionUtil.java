@@ -17,7 +17,7 @@ public class ConversionUtil {
         //Need to Revisit
         Ticker ticker=new Ticker();
         ticker.setStockSymbol(chartInkScanRecord.getStockName());
-       ticker.setExchangeCode(chartInkScanRecord.getNseCode());
+   //    ticker.setExchangeCode(chartInkScanRecord.getNseCode());
 
         return ticker;
     }

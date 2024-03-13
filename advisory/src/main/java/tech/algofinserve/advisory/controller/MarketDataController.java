@@ -32,7 +32,7 @@ public class MarketDataController {
     ConversionUtil conversionUtil;
     @Autowired
     MetaDataService metaDataService;
-    SmartConnect smartConnect=AngelBrokerConnector.getSmartConnectSession(new AngelApiKey());
+ //   SmartConnect smartConnect=AngelBrokerConnector.getSmartConnectSession(new AngelApiKey());
 
     @PostMapping(path = "/marketdata/angel/downloadmarketdata")
     public ResponseEntity<String> downloadMarketData() {
@@ -47,7 +47,7 @@ public class MarketDataController {
         String toDate="2024-01-17 00:00";
 
 
-        Set<StockData> stockDataList= angelMarketDataServiceImpl.getHistoricalDataForTicker(smartConnect,ticker, CandleTimeFrame.ONE_DAY,fromDate,toDate);
+     //   Set<StockData> stockDataList= angelMarketDataServiceImpl.getHistoricalDataForTicker(smartConnect,ticker, CandleTimeFrame.ONE_DAY,fromDate,toDate);
 
         return new ResponseEntity<String>("Data Download Completed.", HttpStatus.OK);
 

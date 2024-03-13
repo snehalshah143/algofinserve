@@ -9,7 +9,7 @@ import tech.algofinserve.advisory.model.persistable.RecommendationPersistable;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-21T19:21:16+0530",
+    date = "2024-02-26T22:58:05+0530",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 11.0.21 (Amazon.com Inc.)"
 )
 @Component
