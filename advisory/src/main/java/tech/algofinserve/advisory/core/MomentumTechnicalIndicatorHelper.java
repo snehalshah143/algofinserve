@@ -92,9 +92,9 @@ double hist=macd -macdSignal;
     }
 
     public MACD getMACD22107(Integer index){
-        double macd=getMACDIndicator2210().getValue(index).doubleValue();
-        double  macdSignal=getMACDSignalIndicator22107().getValue(index).doubleValue();
-        double hist=macd -macdSignal;
+        double macd= getMACDIndicator2210().getValue(index).doubleValue();
+        double  macdSignal= getMACDSignalIndicator22107().getValue(index).doubleValue();
+        double hist= macd - macdSignal;
         return  new MACD(macd,macdSignal,hist);
 
     }

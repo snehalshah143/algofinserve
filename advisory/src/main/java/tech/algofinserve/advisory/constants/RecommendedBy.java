@@ -4,6 +4,5 @@ public enum RecommendedBy {
 
     SNEHAL,
     TEJAS,
-
     SYSTEM;
 }
