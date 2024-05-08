@@ -7,7 +7,7 @@ import tech.algofinserve.advisory.model.persistable.StockDataDailyPersistable;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-26T22:58:04+0530",
+    date = "2024-05-08T18:46:56+0530",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 11.0.21 (Amazon.com Inc.)"
 )
 @Component
